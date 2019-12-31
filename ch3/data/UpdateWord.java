@@ -1,24 +1,22 @@
-package ch3.data;
+package ch3.data; 
 import java.sql.*;
-
-import ch3.data.ConnectDatabase;
 public class UpdateWord extends ConnectDatabase{
-    int isOK;
-    public int UpdateWord(Word word) {
-        connectDatabase();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿â£¨ï¿½Ì³ÐµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½
-        try {
-            String SQL = "update word_table set meaning = ? where word = ? ";
-            PreparedStatement sta = con.prepareStatement(SQL);
-            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½word.getMeaning()
-            sta.setString(1,word.getMeaning());
-            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½2ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½word.getEnglishWord()
-            sta.setString(2,word.getEnglishWord());
-            isOK = sta.executeUpdate();
-            con.close();
-        }
-        catch(SQLException e) {
-            isOK = 0;   //word_tableï¿½ï¿½ï¿½Ðµï¿½wordï¿½Ö¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½
-        }
-        return isOK;
-    }
+   int isOK  ; 
+   public int updateWord(Word word) {
+      connectDatabase();
+      try { 
+          String SQL ="update word_table set meaning = ? where word = ? ";
+          PreparedStatement sta  = con.prepareStatement(SQL);
+          //´Ó×óÏòÓÒÊýµÚ1¸öÍ¨Åä·û?µÄÖµÊÇword.getMeaning():
+          sta.setString(1,word.getMeaning());
+          //´Ó×óÏòÓÒÊýµÚ2¸öÍ¨Åä·û?µÄÖµÊÇword.getEnglishWord():
+          sta.setString(2,word.getEnglishWord());
+          isOK = sta.executeUpdate();
+          con.close();
+      }
+      catch(SQLException e) {
+          isOK = 0; 
+      }
+       return isOK;
+   }
 }

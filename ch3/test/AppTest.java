@@ -1,55 +1,54 @@
 package ch3.test;
-import javax.swing.JFrame;
 import java.sql.*;
 import ch3.data.*;
 public class AppTest {
-    public static void main(String []args) {
-        new CreateDatabaseAndTable();
-        Word word = new Word();
-        String [][] a = { {"boy","nanhai"},{"girl","nvhai"},
-                       {"sun","taiyang"},{"moon","yueliang"},
-                       {"book","shu"},{"water","shui"}
-        };
-    AddWord addWord = new AddWord();
-    for(int i=0;i<a.length;i++){
-        word.setEnglishWord(a[i][0]);
-        word.setMeaning(a[i][1]);
-        addWord.insertWord(word);
-    }
-    QueryOneWord q = new QueryOneWord();
-    word.setEnglishWord("boy");
-    Word re =q.queryOneWord(word);
-    System.out.println("chaxundaoyigedanci:");
-    System.out.printf("%-10s",re.getEnglishWord());
-    System.out.printf("%-10s\n",re.getMeaning());
-    QueryAllWord query = new QueryAllWord();
-    Word [] result =query.queryAllWord();
-    System.out.println("quanbudanci:");
-    input(result);
-    RandomQueryWord random = new RandomQueryWord();
-    random.setCount(3);         
-    result = random.randomQueryWord();
-    System.out.println("suijichouqu"+random.getCount()+"gedanci");
-    input(result);
-    UpdateWord update = new UpdateWord();
-    word.setEnglishWord("book");
-    word.setMeaning("n.shuji,juan,zhangbu,mingce,gongzuobu");
-    update.UpdateWord(word);
-    DelWord del = new DelWord();
-    word.setEnglishWord("boy");
-    del.delWord(word);
-    word.setEnglishWord("girl");
-    del.delWord(word);
-    System.out.println("gengxin,shangchuhopuqunbudnaci");
-    query = new QueryAllWord();
-    result =query.queryAllWord();
-    input(result);
-    }
-    static void input(Word [] result){
-        for(int i=0;i<result.length;i++){
-           System.out.printf("-10%s",result[i].getEnglishWord());
-           System.out.printf("-10%s",result[i].getMeaning());
-           System.out.println();
-    }
-  }
+   public static void main(String []args) {
+      new CreateDatabaseAndTable();
+      Word word = new Word();
+      String [][] a = { {"boy","男孩"},{"girl","女孩"},
+                        {"sun","太阳"},{"moon","月亮"},
+                        {"book","书籍"},{"water","水"}
+                      };
+      AddWord addWord = new AddWord();
+      for(int i=0;i<a.length;i++){
+          word.setEnglishWord(a[i][0]);
+          word.setMeaning(a[i][1]);
+          addWord.insertWord(word);
+      }
+      QueryOneWord q = new QueryOneWord();
+      word.setEnglishWord("boy");
+      Word re =q.queryOneWord(word);
+      System.out.println("查询到的一个单词:"); 
+      System.out.printf("%-10s",re.getEnglishWord());
+      System.out.printf("%-10s\n",re.getMeaning());
+      QueryAllWord query = new QueryAllWord();
+      Word [] result =query.queryAllWord();
+      System.out.println("全部单词:"); 
+      input(result);
+      RandomQueryWord random = new RandomQueryWord();
+      random.setCount(3); //随机抽取3个单词
+      result = random.randomQueryWord();
+      System.out.println("随机抽取"+random.getCount()+"个单词:"); 
+      input(result);
+      UpdateWord update = new UpdateWord();
+      word.setEnglishWord("book");
+      word.setMeaning("n.书籍，卷，帐簿，名册，工作簿 vt.预订，登记");
+      update.updateWord(word);
+      DelWord del = new DelWord();
+      word.setEnglishWord("boy");
+      del.delWord(word);
+      word.setEnglishWord("girl");
+      del.delWord(word);
+      System.out.println("更新、删除后全部单词:"); 
+      query = new QueryAllWord();
+      result =query.queryAllWord();
+      input(result);
+   }
+   static void input(Word [] result){
+      for(int i=0;i<result.length;i++){
+          System.out.printf("%-10s",result[i].getEnglishWord());
+          System.out.printf("%-10s",result[i].getMeaning());
+          System.out.println();   
+      }
+   }
 }
